@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 
+import React from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom';
+
+import Home from './containers/Home/Home';
+import Bus from './containers/Bus/Bus';
+import page404 from './containers/404/404';
+import SomethingWentWrong from './containers/SomethingWentWrong/SomethingWentWrong';
+
 function App() {
+  let routes = (
+      <Switch>
+        <Route path="/bus" component={Bus}/>
+        <Route path="/" exact component={Home}/>
+        {/* <Route path="/weather" exact component={Weather}/>
+        <Route path="/about" exact component={About}/> */}
+        <Route path="/404" exact component={page404}/>
+        <Route path="/somethingwentwrong" exact component={SomethingWentWrong}/>
+        <Redirect to="/404"/>
+      </Switch>
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {routes}
     </div>
   );
 }
