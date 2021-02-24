@@ -7,12 +7,14 @@ import Home from './containers/Home/Home';
 import Bus from './containers/Bus/Bus';
 import page404 from './containers/404/404';
 import SomethingWentWrong from './containers/SomethingWentWrong/SomethingWentWrong';
+import FullInfo from './containers/Bus/FullInfo/FullInfo';
 
 function App() {
   let routes = (
       <Switch>
-        <Route path="/bus" component={Bus}/>
         <Route path="/" exact component={Home}/>
+        <Route path="/bus" component={Bus}/>
+        <Route path="/buscodes" exact component={FullInfo}/>
         {/* <Route path="/weather" exact component={Weather}/>
         <Route path="/about" exact component={About}/> */}
         <Route path="/404" exact component={page404}/>

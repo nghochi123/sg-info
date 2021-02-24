@@ -1,0 +1,20 @@
+.some-spacing-below {
+    margin: 15px 0;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.push-down{
+    margin-bottom: 30px;
+}
+
+.bold {
+    font-weight: 600;
+    text-decoration: underline;
+}
