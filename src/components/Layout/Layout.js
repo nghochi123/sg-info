@@ -7,7 +7,7 @@ import './Layout.css'
 
 const Layout = (props) => {
     return (
-        <div className={props.isFullInfo?"layout-container fullInfo" : "layout-container"}>
+        <div className={props.larger?"layout-container larger" : "layout-container"}>
             <div className="layout-content">
                 <Header title={props.title}/>
                 {props.children}

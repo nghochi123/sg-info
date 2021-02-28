@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Layout from '../../../components/Layout/Layout';
 import getFullBusInfo from '../../../scripts/getFullBusInfo';
 import Page from '../../../components/Pagination/Pagination';
+import Spinner from '../../../components/Spinner/Spinner';
 
 import { Container, Row, Col } from 'reactstrap';
 
@@ -24,9 +25,8 @@ const FullInfo = (props) => {
             </Container>
         ) : null;
     })
-    return (
-    <div>
-        <Layout isFullInfo title={"Bus Codes"}>
+    let main = (
+        <Layout larger title={"Bus Codes"}>
             <div className="push-down">Note: Not all bus stop codes can be found here</div>
             <Page page={page} setPage={setPage}/>
             <Container>
@@ -37,6 +37,18 @@ const FullInfo = (props) => {
             </Container>
             {busCodes}
         </Layout>
+    )
+    if(codes.length===0){
+        main = (
+            <Layout larger title={"Bus Codes"}>
+                <div className="push-down">Note: Not all bus stop codes can be found here</div>
+                <Spinner/>
+            </Layout >
+        )
+    }
+    return (
+    <div>
+        {main}
     </div>
     
     

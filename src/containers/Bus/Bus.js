@@ -11,13 +11,21 @@ import { Container, Row, Col } from 'reactstrap';
 
 import './Bus.css'
 
-const Home = (props) => {
+const Bus = (props) => {
     // const busCode = 43259;
     const [input, setInput] = useState("");
     const [buses, setBuses] = useState([]);
+    const [noBusError, setNoBusError] = useState(false);
+    const [busCode, setBusCode] = useState("");
     const getBusInfo = (busCode) => {
         busInfo(busCode).then(res=>{
             setBuses(res);
+            if(res.length===0) {
+                setNoBusError(true);
+            } else{
+                setNoBusError(false);
+            }
+            setBusCode(busCode);
         }).catch(e=>e);
     }
     const displayTime = time => {
@@ -45,18 +53,32 @@ const Home = (props) => {
             </Row>
         </Container>
     )
-    return (
-    <div>
+    let main = (
         <Layout title={"Bus Info"}>
             <p className="BusText">Enter Bus Stop Code to get Bus Data</p>
             <Search placeholder={"Input Bus Code"} search={input} setSearch={setInput} returnSearchInfo={getBusInfo}/>
-            <div className="pushDown">{buses.length!==0 ?`Bus Stop Code: ${input}` : null}</div><hr></hr>
+            <div className="pushDown">{buses.length!==0 ?`Bus Stop Code: ${busCode}` : null}</div><hr></hr>
             {firstRow}
             {bus}
         </Layout>
+    )
+    if(noBusError){
+        main = (
+            <Layout title={"Bus Info"}>
+                <p className="BusText">Enter Bus Stop Code to get Bus Data</p>
+                <Search placeholder={"Input Bus Code"} search={input} setSearch={setInput} returnSearchInfo={getBusInfo}/>
+                <div className="pushDown">{buses.length!==0 ?`Bus Stop Code: ${busCode}` : null}</div><hr></hr>
+                {firstRow}
+                <p>Error: Bus Stop not found, try another bus stop code. <br/>Your Bus Stop code was {busCode}</p>
+            </Layout>
+        )
+    }
+    return (
+    <div>
+        {main}
     </div>
     
     
 )};
 
-export default Home;
+export default Bus;
